@@ -1,4 +1,4 @@
-# Quản Lý Khách Sạn (223277_DoanVinhHung)
+# Quản Lý Khách Sạn
 
 Ứng dụng WinForms mẫu dùng để quản lý khách hàng, phòng, đặt phòng và sử dụng dịch vụ.
 
@@ -13,74 +13,81 @@
 - Ghi nhận sử dụng dịch vụ cho từng khách.
 
 ## Yêu cầu
-- Windows 10/11
-- .NET Framework phù hợp (kiểm tra target framework trong `223277_DoanVinhHung.csproj`).
-  - Nếu project target .NET Framework (ví dụ 4.7.2), máy người dùng cần cài .NET Framework tương ứng.
-- Visual Studio (nếu muốn build từ source) hoặc chỉ cần file exe trong `bin\Release` để chạy.
+- Hệ điều hành: Windows 10/11.
+- .NET Framework hoặc .NET Desktop Runtime phù hợp với target framework của project. Kiểm tra thông tin target trong file `*.csproj`.
+- Nếu muốn build từ source: Visual Studio hoặc Visual Studio Build Tools.
 
-## Cách build (máy có Visual Studio / Build Tools)
-1. Mở Visual Studio, chọn cấu hình `Release` → Build → Build Solution.
+## Cách build
+1. Mở project bằng Visual Studio → chọn cấu hình `Release` → Build → Build Solution.
 
-Hoặc dùng PowerShell + MSBuild (ví dụ khi có Visual Studio Build Tools):
+Hoặc dùng PowerShell + MSBuild (nếu dùng Build Tools):
 
 ```powershell
-& 'C:\Program Files\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\MSBuild.exe' 'd:\FullStack\File đã học\LT.Net\QuanLyKhachSan\223277_DoanVinhHung\223277_DoanVinhHung\223277_DoanVinhHung.csproj' /p:Configuration=Release
+# Thay <PathToProject.csproj> bằng đường dẫn tới file .csproj của bạn
+& 'C:\Program Files\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\MSBuild.exe' '<PathToProject.csproj>' /p:Configuration=Release
 ```
 
-Sau khi build xong, file thực thi sẽ nằm trong `bin\Release`.
+Sau khi build, file thực thi sẽ nằm trong thư mục `bin\Release` của project (ví dụ `QuanLyKhachSan.exe`).
 
 ## Chạy ứng dụng
-- Chạy `bin\Release\223277_DoanVinhHung.exe` trên máy có .NET Framework tương thích.
-- Nếu thiếu runtime, cài .NET Framework hoặc .NET Desktop Runtime tương ứng từ trang chính thức của Microsoft.
+- Mở `bin\Release\<YourApp>.exe` trên máy có runtime tương thích.
+- Nếu thiếu runtime, tải và cài đặt .NET Framework / .NET Desktop Runtime tương ứng từ trang chính thức của Microsoft.
 
 ## Tạo gói release để chia sẻ
-1. Gói ZIP nhanh:
+- Gói ZIP nhanh:
 
 ```powershell
 Compress-Archive -Path 'bin\Release\*' -DestinationPath 'QuanLyKhachSan-v1.0.zip'
 ```
-Upload file ZIP lên GitHub Releases / Google Drive / Dropbox và chia sẻ link.
 
-2. ClickOnce (publish trực tiếp từ Visual Studio):
-- Visual Studio → Project → Publish → Chọn folder/URL → Publish. ClickOnce tạo installer và hỗ trợ cập nhật tự động.
+- ClickOnce: Visual Studio → Project → Publish → Chọn folder/URL → Publish. Phù hợp nếu muốn auto-update.
 
-3. Tạo installer chuyên nghiệp:
-- Dùng Inno Setup hoặc WiX để tạo `setup.exe`/MSI (tự động tạo shortcut, thêm registry, kèm runtime nếu cần).
-- MSIX để publish lên Microsoft Store (nâng cao).
+- Installer chuyên nghiệp: dùng Inno Setup hoặc WiX để tạo `setup.exe`/MSI (có thể đóng gói runtime nếu cần).
 
-4. Code signing (tuỳ chọn):
-- Ký số file installer/exe để tránh cảnh báo SmartScreen và tăng độ tin cậy.
+- MSIX: để publish lên Microsoft Store (tùy nhu cầu).
 
-## Đưa dự án vào portfolio (gợi ý)
-1. Tạo repository trên GitHub và push source (loại trừ `bin/`, `obj/`, `*.user`, `*.vs/` bằng `.gitignore`).
+- Ký số (code signing) installer/exe là lựa chọn có lợi cho phân phối rộng.
 
-Ví dụ lệnh Git (PowerShell):
+## Đưa dự án lên GitHub / Portfolio
+1. Thêm `.gitignore` cho Visual Studio (loại trừ `bin/`, `obj/`, file cá nhân, v.v.).
+2. Tạo repository công khai và push source để cộng đồng có thể clone và đóng góp.
+
+Ví dụ (thay `<repo-url>` bằng URL repo của bạn):
 
 ```powershell
 git init
 git add .
 git commit -m "Initial commit"
 git branch -M main
-git remote add origin https://github.com/<username>/QuanLyKhachSan.git
+git remote add origin <repo-url>
 git push -u origin main
 ```
 
-2. Tạo GitHub Release và upload file ZIP hoặc installer để người xem có thể tải.
-3. Trong `README.md` repo: thêm mô tả ngắn, hướng dẫn chạy, ảnh chụp màn hình (`screenshots/`), video demo (YouTube) và thông tin tech stack.
-4. Viết phần "Vai trò của tôi" (nêu rõ bạn làm gì trong project) trên trang portfolio cá nhân.
+3. Tạo GitHub Release và upload file ZIP hoặc installer.
+4. Trong `README.md` repo nên có:
+   - Mô tả ngắn, hướng dẫn chạy.
+   - Ảnh chụp màn hình trong thư mục `screenshots/`.
+   - Link tới video demo (nếu có).
+   - Thông tin công nghệ và hướng dẫn đóng góp (Contributing).
+   - Ghi rõ license nếu muốn cho phép cộng đồng dùng / sửa đổi.
 
 ## Kiểm tra trước khi public
-- Chạy file exe trên một máy khác (không có Visual Studio) để kiểm tra thiếu runtime hoặc thiếu file cấu hình.
-- Đảm bảo tập tin cấu hình (`app.config`/`exe.config`) đi kèm nếu cần.
+- Thử chạy trên máy khác (không có Visual Studio) để kiểm tra thiếu runtime hoặc file cấu hình.
+- Đảm bảo file cấu hình (`app.config` / `*.exe.config`) và tài nguyên (hình ảnh, database mẫu) đi kèm nếu cần.
 
-## Các tài nguyên bổ sung (gợi ý)
+## Gợi ý cho repo cộng đồng
+- Thêm tệp `CONTRIBUTING.md` hướng dẫn cách mở issue, pull request và coding style.
+- Thêm `LICENSE` (ví dụ MIT) nếu muốn cấp phép rõ ràng cho người khác sử dụng.
+- Tạo các release có tag để người dùng dễ tải phiên bản ổn định.
+
+## Tài nguyên
 - Inno Setup: https://jrsoftware.org/isinfo.php
 - WiX Toolset: https://wixtoolset.org/
-- Hướng dẫn ClickOnce trong Visual Studio: tra cứu trong tài liệu Microsoft.
-
-## Liên hệ
-- Nếu cần, tôi có thể: tạo `.gitignore` phù hợp, viết hướng dẫn release chi tiết, hoặc tạo sẵn GitHub Release và file ZIP.
+- Tài liệu ClickOnce: Microsoft docs
 
 ---
 
-(Cấu trúc file dựa trên nội dung hiện có trong thư mục dự án. Sửa `Yêu cầu` nếu bạn biết chính xác phiên bản .NET target.)
+Nếu muốn, tôi có thể:
+- Tạo sẵn `.gitignore` cho Visual Studio.
+- Thêm mẫu `CONTRIBUTING.md` và `LICENSE`.
+- Hướng dẫn chi tiết tạo installer bằng Inno Setup.
