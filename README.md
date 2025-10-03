@@ -85,20 +85,20 @@ git push -u origin main
 
 ## Gợi ý cho repo cộng đồng
 
-- Thêm tệp `CONTRIBUTING.md` hướng dẫn cách mở issue, pull request và coding style.
-- Thêm `LICENSE` (ví dụ MIT) nếu muốn cấp phép rõ ràng cho người khác sử dụng.
-- Tạo các release có tag để người dùng dễ tải phiên bản ổn định.
+- Thêm tệp `CONTRIBUTING.md` mô tả cách mở issue, gửi pull request, coding style và quy trình review.
+- Thêm tệp `LICENSE` (ví dụ MIT) để xác định quyền sử dụng và phân phối mã nguồn.
+- Thêm `.gitignore` phù hợp cho Visual Studio để loại trừ `bin/`, `obj/`, tệp người dùng và thư mục tạm.
+- Sử dụng tag và release (semantic versioning) để phát hành các phiên bản ổn định; đính kèm gói ZIP hoặc installer cho mỗi release.
+- Tạo thư mục `screenshots/` chứa ảnh chụp màn hình, và đính kèm hoặc liên kết tới video demo nếu có.
+- Ghi rõ các prerequisites (phiên bản .NET/Framework, runtime) và hướng dẫn cài đặt/running trong README.
+- Nếu cần database hoặc dữ liệu mẫu, cung cấp file dữ liệu hoặc script tạo database trong thư mục `data/`.
 
 ## Tài nguyên
 
 - Inno Setup: https://jrsoftware.org/isinfo.php
 - WiX Toolset: https://wixtoolset.org/
 - Tài liệu ClickOnce: Microsoft docs
+- Hướng dẫn tạo `.gitignore` cho Visual Studio: https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
+- Tham khảo về license: https://choosealicense.com/
 
 ---
-
-Nếu muốn, tôi có thể:
-
-- Tạo sẵn `.gitignore` cho Visual Studio.
-- Thêm mẫu `CONTRIBUTING.md` và `LICENSE`.
-- Hướng dẫn chi tiết tạo installer bằng Inno Setup.
